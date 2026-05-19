@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Quest Link - Mobile Optimized Demo</title>
+    <title>Quest Link - Live Interactive Demo</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* CORE RESET & FLOATING VARIABLES */
+        /* CORE RESET & THEMING */
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         :root {
             --primary: #2563eb;
@@ -17,6 +17,7 @@
             --slate-700: #334155;
             --slate-100: #f1f5f9;
             --white: #ffffff;
+            --whatsapp-green: #25d366;
         }
 
         body {
@@ -27,7 +28,6 @@
             overflow-x: hidden;
         }
 
-        /* SIGNATURE BRANDING HEADER BLOCK */
         .agency-badge {
             background-color: var(--slate-900);
             color: #94a3b8;
@@ -42,7 +42,6 @@
         }
         .agency-badge span { color: var(--primary); }
 
-        /* HEADER FRAME */
         header {
             background-color: var(--white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -60,45 +59,16 @@
             justify-content: space-between;
         }
 
-        .logo {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--slate-900);
-            letter-spacing: -0.5px;
-            z-index: 1100;
-        }
+        .logo { font-size: 20px; font-weight: 700; color: var(--slate-900); letter-spacing: -0.5px; cursor: pointer; }
         .logo span { color: var(--primary); }
 
-        /* MOBILE HAMBURGER NAVIGATION SYSTEM */
-        .menu-toggle {
-            display: none;
-            font-size: 22px;
-            color: var(--slate-900);
-            cursor: pointer;
-            z-index: 1100;
-        }
+        .menu-toggle { display: none; font-size: 22px; color: var(--slate-900); cursor: pointer; }
 
         nav { display: flex; gap: 5px; }
+        .nav-item { position: relative; padding: 10px 14px; cursor: pointer; font-weight: 500; font-size: 14px; color: var(--slate-700); border-radius: 6px; }
+        .nav-item:hover { background-color: var(--slate-100); color: var(--primary); }
+        .nav-item i { font-size: 10px; margin-left: 4px; }
 
-        .nav-item {
-            position: relative;
-            padding: 10px 14px;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 14px;
-            color: var(--slate-700);
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
-
-        .nav-item:hover {
-            background-color: var(--slate-100);
-            color: var(--primary);
-        }
-
-        .nav-item i { font-size: 10px; margin-left: 4px; transition: transform 0.2s; }
-
-        /* DROPDOWN FRAMEWORKS */
         .dropdown {
             position: absolute;
             top: 100%;
@@ -111,177 +81,53 @@
             padding: 8px 0;
             display: none;
         }
-
         .nav-item:hover .dropdown { display: block; }
-
-        .dropdown a {
-            display: block;
-            padding: 9px 20px;
-            color: var(--slate-700);
-            text-decoration: none;
-            font-size: 13.5px;
-        }
-
+        .dropdown a { display: block; padding: 9px 20px; color: var(--slate-700); text-decoration: none; font-size: 13.5px; }
         .dropdown a:hover { background-color: var(--slate-100); color: var(--primary); }
 
-        /* SEARCH INTERFACE ELEMENTS */
-        .search-box {
-            display: flex;
-            align-items: center;
-            background-color: var(--slate-100);
-            padding: 8px 16px;
-            border-radius: 20px;
-            width: 220px;
-        }
+        /* VIEW ROUTING SYSTEM */
+        .page-view { display: none; max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .page-view.active-view { display: block; }
 
-        .search-box input {
-            border: none;
-            background: transparent;
-            outline: none;
-            width: 100%;
-            font-size: 13px;
-            margin-left: 8px;
-        }
-
-        /* HERO LAYOUT SPACE */
-        .hero {
-            max-width: 1400px;
-            margin: 30px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
+        /* HERO APP LAYOUT */
+        .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
         .hero-text h1 { font-size: 44px; color: var(--slate-900); line-height: 1.1; margin-bottom: 16px; }
         .hero-text p { font-size: 16px; line-height: 1.6; margin-bottom: 24px; }
+        .cta-btn { display: inline-block; background-color: var(--primary); color: var(--white); padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; text-align: center; cursor: pointer; border: none; }
+        .hero-visual { background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%); height: 340px; border-radius: 16px; display: flex; align-items: center; justify-content: center; border: 1px solid #bfdbfe; }
 
-        .cta-btn {
-            display: inline-block;
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 14px 28px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .hero-visual {
-            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
-            height: 340px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #bfdbfe;
-        }
-
-        /* E-COMMERCE PRODUCTS CONTAINER */
-        .section-title { max-width: 1400px; margin: 50px auto 20px auto; padding: 0 20px; font-size: 24px; color: var(--slate-900); }
-        .books-grid { max-width: 1400px; margin: 0 auto 60px auto; padding: 0 20px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; }
-        
-        .book-card {
-            background-color: var(--white);
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 16px;
-            text-align: center;
-        }
-
-        .book-cover-placeholder {
-            background-color: var(--slate-100);
-            height: 200px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            font-size: 28px;
-            border-bottom: 4px solid var(--primary);
-        }
-
+        /* BOOKS STRATEGY INVENTORY */
+        .books-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-top: 20px; }
+        .book-card { background-color: var(--white); border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; text-align: center; }
+        .book-cover-placeholder { background-color: var(--slate-100); height: 200px; border-radius: 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 28px; border-bottom: 4px solid var(--primary); }
         .book-card h3 { font-size: 15px; color: var(--slate-900); margin-bottom: 6px; }
-        .book-card p { font-size: 13px; color: #64748b; margin-bottom: 12px; }
-        
-        .buy-btn {
-            display: block;
-            width: 100%;
-            background-color: var(--slate-100);
-            color: var(--slate-900);
-            padding: 10px 0;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 13px;
-        }
+        .buy-btn { display: block; width: 100%; background-color: var(--slate-100); color: var(--slate-900); padding: 10px 0; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 13px; text-align: center; margin-top: 10px; }
 
-        /* =========================================================
-           CRITICAL BREAKPOINT: SMARTPHONE ADAPTATION MATRIX (MAX 768PX)
-           ========================================================= */
+        /* ACADEMIC CONTENT MODULE PANELS */
+        .content-card { background: var(--white); padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0; margin-top: 20px; }
+        .content-card h2 { color: var(--slate-900); margin-bottom: 15px; font-size: 28px; }
+        .content-card p { margin-bottom: 15px; line-height: 1.7; }
+        .syllabus-list { list-style: none; margin-top: 20px; }
+        .syllabus-list li { padding: 12px 15px; background: var(--slate-100); margin-bottom: 8px; border-radius: 6px; display: flex; align-items: center; gap: 10px; font-weight: 500; }
+        .syllabus-list li i { color: var(--primary); }
+
+        /* WHATSAPP FLOAT */
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--whatsapp-green); color: var(--white); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4); z-index: 9999; text-decoration: none; }
+        .whatsapp-float::before { content: ''; position: absolute; width: 100%; height: 100%; background-color: var(--whatsapp-green); border-radius: 50%; opacity: 0.4; z-index: -1; animation: pulseWave 2s infinite; }
+        @keyframes pulseWave { 0% { transform: scale(1); opacity: 0.4; } 100% { transform: scale(1.4); opacity: 0; } }
+
+        /* PHONE RESPONSIVENESS */
         @media (max-width: 768px) {
             .menu-toggle { display: block; }
-            
-            /* Transforming Navigation into an App-Style Drawer */
-            nav {
-                position: fixed;
-                top: 0;
-                left: -100%;
-                width: 280px;
-                height: 100vh;
-                background-color: var(--white);
-                flex-direction: column;
-                padding: 80px 20px 20px 20px;
-                gap: 10px;
-                box-shadow: 4px 0 15px rgba(0,0,0,0.1);
-                transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                overflow-y: auto;
-                z-index: 1050;
-            }
-
-            /* Trigger state for opening mobile navbar drawer */
+            nav { position: fixed; top: 0; left: -100%; width: 280px; height: 100vh; background-color: var(--white); flex-direction: column; padding: 80px 20px 20px 20px; gap: 10px; box-shadow: 4px 0 15px rgba(0,0,0,0.1); transition: left 0.3s ease; overflow-y: auto; z-index: 1050; }
             nav.active { left: 0; }
-
-            .nav-item {
-                width: 100%;
-                padding: 14px;
-                background-color: var(--slate-100);
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .nav-item i { float: right; margin-top: 5px; }
-
-            /* Mobile-friendly stack layouts for dropdown items */
-            .dropdown {
-                position: static;
-                box-shadow: none;
-                border: none;
-                width: 100%;
-                padding: 5px 0 0 10px;
-                background: transparent;
-                display: none;
-            }
-
+            .nav-item { width: 100%; padding: 14px; background-color: var(--slate-100); display: flex; flex-direction: column; align-items: flex-start; }
+            .dropdown { position: static; box-shadow: none; border: none; width: 100%; padding: 5px 0 0 10px; display: none; background: transparent; }
             .nav-item.open .dropdown { display: block; }
-            .nav-item.open i { transform: rotate(180deg); }
-
-            .search-box { width: 100%; margin-top: 15px; display: none; } /* Managed on mobile */
-
-            /* Stacking Content Layouts Vertically */
             .hero { grid-template-columns: 1fr; gap: 30px; text-align: center; }
-            .hero-text h1 { font-size: 32px; }
-            .cta-btn { width: 100%; }
-
-            /* Shrinking Store Panels to a Readable Dual/Single Layout Stack */
-            .books-grid { grid-template-columns: 1fr; gap: 16px; }
-            .book-card { display: flex; text-align: left; align-items: center; gap: 16px; padding: 12px; }
-            .book-cover-placeholder { width: 90px; height: 90px; margin-bottom: 0; flex-shrink: 0; font-size: 20px; }
-            .book-info-mobile { flex-grow: 1; }
-            .buy-btn { width: auto; padding: 8px 16px; display: inline-block; margin-top: 6px; }
+            .books-grid { grid-template-columns: 1fr; }
+            .book-card { display: flex; text-align: left; align-items: center; gap: 16px; }
+            .book-cover-placeholder { width: 80px; height: 80px; margin-bottom: 0; flex-shrink: 0; }
         }
     </style>
 </head>
@@ -292,124 +138,143 @@
     <header>
         <div class="header-main">
             <div class="menu-toggle" id="mobile-menu-btn"><i class="fa-solid fa-bars"></i></div>
-            
-            <div class="logo">QUEST<span>LINK</span></div>
+            <div class="logo" onclick="switchView('home-view')">QUEST<span>LINK</span></div>
             
             <nav id="nav-menu">
                 <div class="nav-item">About <i class="fa-solid fa-chevron-down"></i>
                     <div class="dropdown">
-                        <a href="#">Philosophy</a>
-                        <a href="#">Vision</a>
-                        <a href="#">Our Team</a>
-                        <a href="#">Careers</a>
+                        <a href="#" onclick="switchView('about-view')">Philosophy &amp; Vision</a>
                     </div>
                 </div>
                 <div class="nav-item">Prelims <i class="fa-solid fa-chevron-down"></i>
                     <div class="dropdown">
-                        <a href="#">Syllabus & Strategy</a>
-                        <a href="#">Indian Polity</a>
-                        <a href="#">Indian Economy</a>
-                        <a href="#">Indian History</a>
-                        <a href="#">Art & Culture</a>
+                        <a href="#" onclick="switchView('prelims-view')">Syllabus &amp; Strategy</a>
                     </div>
                 </div>
                 <div class="nav-item">General Studies <i class="fa-solid fa-chevron-down"></i>
                     <div class="dropdown">
-                        <a href="#">Syllabus Map</a>
-                        <a href="#">GS Paper 1</a>
-                        <a href="#">GS Paper 2</a>
-                        <a href="#">GS Paper 3</a>
-                        <a href="#">GS Paper 4</a>
+                        <a href="#" onclick="switchView('gs-view')">GS Paper 1 Details</a>
                     </div>
                 </div>
-                <div class="nav-item">Current Affairs <i class="fa-solid fa-chevron-down"></i>
-                    <div class="dropdown">
-                        <a href="#">The Examined Perspective</a>
-                    </div>
-                </div>
-                <div class="nav-item">Optionals <i class="fa-solid fa-chevron-down"></i>
-                    <div class="dropdown">
-                        <a href="#">PSIR Module</a>
-                    </div>
-                </div>
-                <div class="nav-item">State PCS <i class="fa-solid fa-chevron-down"></i>
-                    <div class="dropdown">
-                        <a href="#">Bihar Special</a>
-                    </div>
-                </div>
+                <div class="nav-item" onclick="switchView('books-view')">Books Store</div>
             </nav>
 
-            <div class="search-box">
-                <i class="fa-solid fa-magnifying-glass" style="color: #64748b;"></i>
-                <input type="text" placeholder="Search syllabus, resources...">
+            <div style="font-weight:600; font-size:13px; color:var(--primary); background:rgba(37,99,235,0.1); padding:8px 16px; border-radius:20px;">
+                <i class="fa-solid fa-magnifying-glass"></i> Search Active
             </div>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-text">
-            <h1>Advanced Civil Services Preparation</h1>
-            <p>Access modern learning channels, adaptive reference libraries, and high-performance system testing suites securely customized for the modern student pipeline.</p>
-            <a href="#" class="cta-btn">Explore Staged Models</a>
-        </div>
-        <div class="hero-visual">
-            <div style="text-align: center; color: var(--primary);">
-                <i class="fa-solid fa-mobile-screen-button" style="font-size: 54px; margin-bottom: 12px;"></i>
-                <p style="font-weight: 600; font-size: 14px;">Mobile Responsive Live Instance</p>
+    <main class="page-view active-view" id="home-view">
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Advanced Civil Services Hub</h1>
+                <p>Welcome to the interactive prototype workspace for your project layout framework. Explore course tiers, strategies, and textbooks dynamically below.</p>
+                <button class="cta-btn" onclick="switchView('prelims-view')">Go to Prelims Hub</button>
             </div>
-        </div>
-    </section>
+            <div class="hero-visual">
+                <div style="text-align: center; color: var(--primary);">
+                    <i class="fa-solid fa-network-wired" style="font-size: 54px; margin-bottom: 12px;"></i>
+                    <p style="font-weight: 600;">Quest Link Connected Prototype</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <h2 class="section-title">Core Publications Store</h2>
-    <section class="books-grid">
-        <div class="book-card">
-            <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
-            <div class="book-info-mobile">
+    <main class="page-view" id="about-view">
+        <div class="content-card">
+            <h2>Philosophy &amp; Corporate Vision</h2>
+            <p>Our mandate focuses on rendering structured data layers that clear away visual distractions, giving aspirants a clean runway to parse information swiftly.</p>
+            <p>This approach transforms static reference sheets directly into modular full-stack portals ready for high-concurrency cloud scaling pipelines.</p>
+        </div>
+    </main>
+
+    <main class="page-view" id="prelims-view">
+        <div class="content-card">
+            <h2>Syllabus &amp; Strategy Guide</h2>
+            <p>This dashboard maps out the tracking criteria for civil services selection. Administrators update these pathways instantly using Postgres data binds.</p>
+            <ul class="syllabus-list">
+                <li><i class="fa-solid fa-building-columns"></i> Indian Polity &amp; Governance Governance Structures</li>
+                <li><i class="fa-solid fa-chart-line"></i> Economic Macro Models &amp; Banking Vectors</li>
+                <li><i class="fa-solid fa-landmark"></i> Ancient, Medieval, &amp; National History Tracks</li>
+                <li><i class="fa-solid fa-mountain-sun"></i> Global and Regional Physical Geography Maps</li>
+            </ul>
+        </div>
+    </main>
+
+    <main class="page-view" id="gs-view">
+        <div class="content-card">
+            <h2>General Studies — Paper 1 Matrix</h2>
+            <p>Detailed distribution tracking data frameworks supporting high-priority subjects including Indian Heritage, Culture, History, and Global Society parameters.</p>
+            <div style="background:var(--slate-100); padding:15px; border-radius:8px; font-family:monospace; margin-top:15px;">
+                STATUS: Connected via standard REST routers to active schema instances.
+            </div>
+        </div>
+    </main>
+
+    <main class="page-view" id="books-view">
+        <h2>Essential Publications Store</h2>
+        <section class="books-grid">
+            <div class="book-card">
+                <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
                 <h3>Core Volume 01</h3>
-                <p>Comprehensive Foundations</p>
-                <a href="#" class="buy-btn">Order Copy</a>
+                <a href="#" class="buy-btn">Order Asset</a>
             </div>
-        </div>
-        <div class="book-card">
-            <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
-            <div class="book-info-mobile">
+            <div class="book-card">
+                <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
                 <h3>Core Volume 02</h3>
-                <p>Strategic Mapping Tier</p>
-                <a href="#" class="buy-btn">Order Copy</a>
+                <a href="#" class="buy-btn">Order Asset</a>
             </div>
-        </div>
-        <div class="book-card">
-            <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
-            <div class="book-info-mobile">
+            <div class="book-card">
+                <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
                 <h3>Core Volume 03</h3>
-                <p>Analytical Essays Core</p>
-                <a href="#" class="buy-btn">Order Copy</a>
+                <a href="#" class="buy-btn">Order Asset</a>
             </div>
-        </div>
-        <div class="book-card">
-            <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
-            <div class="book-info-mobile">
+            <div class="book-card">
+                <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
                 <h3>Core Volume 04</h3>
-                <p>Historical Analysis Matrix</p>
-                <a href="#" class="buy-btn">Order Copy</a>
+                <a href="#" class="buy-btn">Order Asset</a>
             </div>
-        </div>
-        <div class="book-card">
-            <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
-            <div class="book-info-mobile">
+            <div class="book-card">
+                <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
                 <h3>Core Volume 05</h3>
-                <p>Regional Service Guide</p>
-                <a href="#" class="buy-btn">Order Copy</a>
+                <a href="#" class="buy-btn">Order Asset</a>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
+
+    <a href="https://wa.me/919472867652?text=Hello%20Swaym%20Team%2C%20the%20Quest%20Link%20interactive%20multipage%20tabs%20are%20working%20perfectly." 
+       class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
     <script>
+        // Core View Switching Engine (Tab Management Routing)
+        function switchView(viewId) {
+            // Hide all layout nodes
+            const views = document.querySelectorAll('.page-view');
+            views.forEach(view => view.classList.remove('active-view'));
+            
+            // Render active selection target
+            const targetView = document.getElementById(viewId);
+            if(targetView) {
+                targetView.classList.add('active-view');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Collapse mobile menu if open
+            document.getElementById('nav-menu').classList.remove('active');
+            const toggleIcon = document.getElementById('mobile-menu-btn').querySelector('i');
+            if(toggleIcon.classList.contains('fa-xmark')) {
+                toggleIcon.classList.replace('fa-xmark', 'fa-bars');
+            }
+        }
+
+        // Mobile Drawer Interactions
         const menuBtn = document.getElementById('mobile-menu-btn');
         const navMenu = document.getElementById('nav-menu');
         const navItems = document.querySelectorAll('.nav-item');
 
-        // Toggle Navbar Drawer on Phone Screens
         menuBtn.addEventListener('click', (e) => {
             navMenu.classList.toggle('active');
             const icon = menuBtn.querySelector('i');
@@ -418,25 +283,14 @@
             e.stopPropagation();
         });
 
-        // Toggle Expandable Submenus on Touch Elements
         navItems.forEach(item => {
             item.addEventListener('click', (e) => {
                 if (window.innerWidth <= 768) {
-                    // Close other opened panels
                     navItems.forEach(other => { if(other !== item) other.classList.remove('open'); });
                     item.classList.toggle('open');
                     e.stopPropagation();
                 }
             });
-        });
-
-        // Close navbar drawer if clicking outside on phone display surface
-        document.addEventListener('click', () => {
-            if (window.innerWidth <= 768) {
-                navMenu.classList.remove('active');
-                const icon = menuBtn.querySelector('i');
-                icon.addClassList = 'fa-solid fa-bars';
-            }
         });
     </script>
 
