@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Quest Link - Interactive Live Demo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
@@ -29,7 +29,7 @@
             overflow-x: hidden;
         }
 
-        /* WATERMARK BRANDING BAR */
+        /* UPDATED BRANDING WATERMARK BAR */
         .agency-badge {
             background-color: var(--slate-900);
             color: #94a3b8;
@@ -100,9 +100,31 @@
         .cta-btn { display: inline-block; background-color: var(--primary); color: var(--white); padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; text-align: center; cursor: pointer; border: none; }
         .hero-visual { background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%); height: 340px; border-radius: 16px; display: flex; align-items: center; justify-content: center; border: 1px solid #bfdbfe; }
 
+        /* NEW HOME/COLLAPSE LINK BUTTON BUTTON STYLE */
+        .back-home-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background: rgba(37, 99, 235, 0.06);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+        .back-home-link:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
         /* WORKSPACE TEMPLATE BLOCKS */
         .workspace-card { background: var(--white); padding: 40px; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
-        .workspace-breadcrumbs { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 10px; }
+        .workspace-breadcrumbs { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #64748b; margin-bottom: 10px; }
         .workspace-card h2 { color: var(--slate-900); font-size: 32px; margin-bottom: 15px; }
         .workspace-card p { line-height: 1.7; font-size: 16px; color: var(--slate-700); margin-bottom: 20px; }
         
@@ -141,7 +163,7 @@
 </head>
 <body>
 
-    <div class="agency-badge">Engineered &amp; Supplied by <span>SWAYM</span> Systems</div>
+    <div class="agency-badge">Developed and maintained by <span>Swaym</span></div>
 
     <header>
         <div class="header-main">
@@ -232,6 +254,10 @@
     </main>
 
     <main class="page-view" id="dynamic-workspace-view">
+        <button class="back-home-link" onclick="switchView('home-view')">
+            <i class="fa-solid fa-arrow-left"></i> Back to Main Home
+        </button>
+        
         <div class="workspace-card">
             <div id="content-breadcrumbs" class="workspace-breadcrumbs">Menu / Sub-Menu</div>
             <h2 id="content-title">Subject Node</h2>
@@ -251,6 +277,10 @@
     </main>
 
     <main class="page-view" id="books-view">
+        <button class="back-home-link" onclick="switchView('home-view')">
+            <i class="fa-solid fa-arrow-left"></i> Back to Main Home
+        </button>
+
         <div class="workspace-breadcrumbs">Store Assets</div>
         <h2 style="font-size:32px; color:var(--slate-900); margin-bottom:10px;">Essential Publications</h2>
         <p style="margin-bottom:30px;">Manage pricing, inventory numbers, and cover asset paths for Books 1 to 5 cleanly from the underlying database.</p>
@@ -265,6 +295,10 @@
     </main>
 
     <main class="page-view" id="courses-view">
+        <button class="back-home-link" onclick="switchView('home-view')">
+            <i class="fa-solid fa-arrow-left"></i> Back to Main Home
+        </button>
+
         <div class="workspace-breadcrumbs">Streaming Portals</div>
         <h2 style="font-size:32px; color:var(--slate-900); margin-bottom:10px;">Video Mastery Programs</h2>
         <p style="margin-bottom:30px;">Premium course classrooms secured behind stateless backend user token verification layers.</p>
