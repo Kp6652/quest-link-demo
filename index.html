@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Quest Link - Live Interactive Demo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Quest Link - Interactive Live Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        /* CORE RESET & THEMING */
+        /* BASE DESIGN MATRIX */
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         :root {
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
             --slate-900: #0f172a;
+            --slate-800: #1e293b;
             --slate-700: #334155;
             --slate-100: #f1f5f9;
             --white: #ffffff;
@@ -28,6 +29,7 @@
             overflow-x: hidden;
         }
 
+        /* WATERMARK BRANDING BAR */
         .agency-badge {
             background-color: var(--slate-900);
             color: #94a3b8;
@@ -42,6 +44,7 @@
         }
         .agency-badge span { color: var(--primary); }
 
+        /* PERSISTENT HEADER BLOCK */
         header {
             background-color: var(--white);
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -64,10 +67,11 @@
 
         .menu-toggle { display: none; font-size: 22px; color: var(--slate-900); cursor: pointer; }
 
-        nav { display: flex; gap: 5px; }
-        .nav-item { position: relative; padding: 10px 14px; cursor: pointer; font-weight: 500; font-size: 14px; color: var(--slate-700); border-radius: 6px; }
+        /* DESKTOP DROPDOWN ARCHITECTURE */
+        nav { display: flex; gap: 2px; }
+        .nav-item { position: relative; padding: 10px 12px; cursor: pointer; font-weight: 600; font-size: 13.5px; color: var(--slate-700); border-radius: 6px; }
         .nav-item:hover { background-color: var(--slate-100); color: var(--primary); }
-        .nav-item i { font-size: 10px; margin-left: 4px; }
+        .nav-item i { font-size: 9px; margin-left: 3px; }
 
         .dropdown {
             position: absolute;
@@ -77,63 +81,67 @@
             border: 1px solid #e2e8f0;
             border-radius: 8px;
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-            min-width: 220px;
-            padding: 8px 0;
+            min-width: 240px;
+            padding: 6px 0;
             display: none;
         }
         .nav-item:hover .dropdown { display: block; }
-        .dropdown a { display: block; padding: 9px 20px; color: var(--slate-700); text-decoration: none; font-size: 13.5px; }
+        .dropdown a { display: block; padding: 10px 20px; color: var(--slate-700); text-decoration: none; font-size: 13px; font-weight: 500; }
         .dropdown a:hover { background-color: var(--slate-100); color: var(--primary); }
 
-        /* VIEW ROUTING SYSTEM */
+        /* VIEW CONTAINER SYSTEM */
         .page-view { display: none; max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
         .page-view.active-view { display: block; }
 
-        /* HERO APP LAYOUT */
+        /* HOMEPAGE VIEW DESIGN */
         .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
         .hero-text h1 { font-size: 44px; color: var(--slate-900); line-height: 1.1; margin-bottom: 16px; }
         .hero-text p { font-size: 16px; line-height: 1.6; margin-bottom: 24px; }
         .cta-btn { display: inline-block; background-color: var(--primary); color: var(--white); padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; text-align: center; cursor: pointer; border: none; }
         .hero-visual { background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%); height: 340px; border-radius: 16px; display: flex; align-items: center; justify-content: center; border: 1px solid #bfdbfe; }
 
-        /* BOOKS STRATEGY INVENTORY */
-        .books-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-top: 20px; }
-        .book-card { background-color: var(--white); border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; text-align: center; }
+        /* WORKSPACE TEMPLATE BLOCKS */
+        .workspace-card { background: var(--white); padding: 40px; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
+        .workspace-breadcrumbs { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 10px; }
+        .workspace-card h2 { color: var(--slate-900); font-size: 32px; margin-bottom: 15px; }
+        .workspace-card p { line-height: 1.7; font-size: 16px; color: var(--slate-700); margin-bottom: 20px; }
+        
+        .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 30px; }
+        .feature-item { background: var(--slate-100); padding: 20px; border-radius: 10px; border-left: 4px solid var(--primary); }
+        .feature-item h4 { font-size: 16px; color: var(--slate-900); margin-bottom: 5px; }
+        .feature-item p { font-size: 14px; margin-bottom: 0; color: #64748b; }
+
+        /* BOOKS & PORTAL MATRIX VIEW */
+        .books-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; margin-top: 25px; }
+        .book-card { background-color: var(--white); border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; text-align: center; }
         .book-cover-placeholder { background-color: var(--slate-100); height: 200px; border-radius: 8px; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 28px; border-bottom: 4px solid var(--primary); }
-        .book-card h3 { font-size: 15px; color: var(--slate-900); margin-bottom: 6px; }
-        .buy-btn { display: block; width: 100%; background-color: var(--slate-100); color: var(--slate-900); padding: 10px 0; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 13px; text-align: center; margin-top: 10px; }
+        .buy-btn { display: block; width: 100%; background-color: var(--slate-100); color: var(--slate-900); padding: 10px 0; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 13px; text-align: center; }
 
-        /* ACADEMIC CONTENT MODULE PANELS */
-        .content-card { background: var(--white); padding: 30px; border-radius: 12px; border: 1px solid #e2e8f0; margin-top: 20px; }
-        .content-card h2 { color: var(--slate-900); margin-bottom: 15px; font-size: 28px; }
-        .content-card p { margin-bottom: 15px; line-height: 1.7; }
-        .syllabus-list { list-style: none; margin-top: 20px; }
-        .syllabus-list li { padding: 12px 15px; background: var(--slate-100); margin-bottom: 8px; border-radius: 6px; display: flex; align-items: center; gap: 10px; font-weight: 500; }
-        .syllabus-list li i { color: var(--primary); }
-
-        /* WHATSAPP FLOAT */
+        /* WHATSAPP FLOAT BUTTON */
         .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background-color: var(--whatsapp-green); color: var(--white); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4); z-index: 9999; text-decoration: none; }
         .whatsapp-float::before { content: ''; position: absolute; width: 100%; height: 100%; background-color: var(--whatsapp-green); border-radius: 50%; opacity: 0.4; z-index: -1; animation: pulseWave 2s infinite; }
         @keyframes pulseWave { 0% { transform: scale(1); opacity: 0.4; } 100% { transform: scale(1.4); opacity: 0; } }
 
-        /* PHONE RESPONSIVENESS */
+        /* SMARTPHONE SCREEN ADJUSTMENTS */
         @media (max-width: 768px) {
             .menu-toggle { display: block; }
-            nav { position: fixed; top: 0; left: -100%; width: 280px; height: 100vh; background-color: var(--white); flex-direction: column; padding: 80px 20px 20px 20px; gap: 10px; box-shadow: 4px 0 15px rgba(0,0,0,0.1); transition: left 0.3s ease; overflow-y: auto; z-index: 1050; }
+            nav { position: fixed; top: 0; left: -100%; width: 290px; height: 100vh; background-color: var(--white); flex-direction: column; padding: 80px 20px 20px 20px; gap: 8px; box-shadow: 4px 0 15px rgba(0,0,0,0.1); transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1); overflow-y: auto; z-index: 1050; }
             nav.active { left: 0; }
-            .nav-item { width: 100%; padding: 14px; background-color: var(--slate-100); display: flex; flex-direction: column; align-items: flex-start; }
+            .nav-item { width: 100%; padding: 12px; background-color: var(--slate-100); display: flex; flex-direction: column; align-items: flex-start; }
             .dropdown { position: static; box-shadow: none; border: none; width: 100%; padding: 5px 0 0 10px; display: none; background: transparent; }
             .nav-item.open .dropdown { display: block; }
             .hero { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            .feature-grid { grid-template-columns: 1fr; }
             .books-grid { grid-template-columns: 1fr; }
-            .book-card { display: flex; text-align: left; align-items: center; gap: 16px; }
-            .book-cover-placeholder { width: 80px; height: 80px; margin-bottom: 0; flex-shrink: 0; }
+            .book-card { display: flex; text-align: left; align-items: center; gap: 16px; padding: 12px; }
+            .book-cover-placeholder { width: 80px; height: 80px; margin-bottom: 0; }
+            .buy-btn { width: auto; padding: 8px 16px; margin-top: 5px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="agency-badge">Engineered & Supplied by <span>SWAYM</span> Systems</div>
+    <div class="agency-badge">Engineered &amp; Supplied by <span>SWAYM</span> Systems</div>
 
     <header>
         <div class="header-main">
@@ -143,23 +151,65 @@
             <nav id="nav-menu">
                 <div class="nav-item">About <i class="fa-solid fa-chevron-down"></i>
                     <div class="dropdown">
-                        <a href="#" onclick="switchView('about-view')">Philosophy &amp; Vision</a>
+                        <a href="#" onclick="loadContent('About', 'Philosophy')">Philosophy</a>
+                        <a href="#" onclick="loadContent('About', 'Vision')">Vision</a>
+                        <a href="#" onclick="loadContent('About', 'Team')">Team</a>
+                        <a href="#" onclick="loadContent('About', 'Careers')">Careers</a>
                     </div>
                 </div>
                 <div class="nav-item">Prelims <i class="fa-solid fa-chevron-down"></i>
                     <div class="dropdown">
-                        <a href="#" onclick="switchView('prelims-view')">Syllabus &amp; Strategy</a>
+                        <a href="#" onclick="loadContent('Prelims', 'Syllabus &amp; Strategy')">Syllabus &amp; Strategy</a>
+                        <a href="#" onclick="loadContent('Prelims', 'Indian Polity')">Indian Polity</a>
+                        <a href="#" onclick="loadContent('Prelims', 'Indian Economy')">Indian Economy</a>
+                        <a href="#" onclick="loadContent('Prelims', 'Indian History')">Indian History</a>
+                        <a href="#" onclick="loadContent('Prelims', 'Art &amp; Culture')">Art &amp; Culture</a>
+                        <a href="#" onclick="loadContent('Prelims', 'Geography')">Geography</a>
+                        <a href="#" onclick="loadContent('Prelims', 'Environment')">Environment</a>
+                        <a href="#" onclick="loadContent('Prelims', 'Science &amp; Technology')">Science &amp; Technology</a>
                     </div>
                 </div>
                 <div class="nav-item">General Studies <i class="fa-solid fa-chevron-down"></i>
                     <div class="dropdown">
-                        <a href="#" onclick="switchView('gs-view')">GS Paper 1 Details</a>
+                        <a href="#" onclick="loadContent('General Studies', 'Syllabus &amp; Strategy')">Syllabus &amp; Strategy</a>
+                        <a href="#" onclick="loadContent('General Studies', 'GS Paper 1')">GS Paper 1</a>
+                        <a href="#" onclick="loadContent('General Studies', 'GS Paper 2')">GS Paper 2</a>
+                        <a href="#" onclick="loadContent('General Studies', 'GS Paper 3')">GS Paper 3</a>
+                        <a href="#" onclick="loadContent('General Studies', 'GS Paper 4')">GS Paper 4</a>
                     </div>
                 </div>
-                <div class="nav-item" onclick="switchView('books-view')">Books Store</div>
+                <div class="nav-item">Current Affairs <i class="fa-solid fa-chevron-down"></i>
+                    <div class="dropdown">
+                        <a href="#" onclick="loadContent('Current Affairs', 'The Examined Perspective')">The Examined Perspective</a>
+                    </div>
+                </div>
+                <div class="nav-item">Essays <i class="fa-solid fa-chevron-down"></i>
+                    <div class="dropdown">
+                        <a href="#" onclick="loadContent('Essays', 'The Essential Essays')">The Essential Essays</a>
+                    </div>
+                </div>
+                <div class="nav-item">Optionals <i class="fa-solid fa-chevron-down"></i>
+                    <div class="dropdown">
+                        <a href="#" onclick="loadContent('Optionals', 'PSIR')">PSIR</a>
+                    </div>
+                </div>
+                <div class="nav-item">Interview <i class="fa-solid fa-chevron-down"></i>
+                    <div class="dropdown">
+                        <a href="#" onclick="loadContent('Interview Guidance', 'Strategy')">Strategy</a>
+                        <a href="#" onclick="loadContent('Interview Guidance', 'Transcripts')">Transcripts</a>
+                    </div>
+                </div>
+                <div class="nav-item">State PCS <i class="fa-solid fa-chevron-down"></i>
+                    <div class="dropdown">
+                        <a href="#" onclick="loadContent('State PCS', 'Bihar Special')">Bihar Special</a>
+                    </div>
+                </div>
+                <div class="nav-item" onclick="switchView('books-view')">Books</div>
+                <div class="nav-item" onclick="switchView('courses-view')">Video Courses</div>
+                <div class="nav-item" onclick="loadContent('Contact Us', 'Support Desk')">Contact Us</div>
             </nav>
 
-            <div style="font-weight:600; font-size:13px; color:var(--primary); background:rgba(37,99,235,0.1); padding:8px 16px; border-radius:20px;">
+            <div style="font-weight:600; font-size:12px; color:var(--primary); background:rgba(37,99,235,0.08); padding:8px 14px; border-radius:20px;">
                 <i class="fa-solid fa-magnifying-glass"></i> Search Active
             </div>
         </div>
@@ -168,101 +218,83 @@
     <main class="page-view active-view" id="home-view">
         <section class="hero">
             <div class="hero-text">
-                <h1>Advanced Civil Services Hub</h1>
-                <p>Welcome to the interactive prototype workspace for your project layout framework. Explore course tiers, strategies, and textbooks dynamically below.</p>
-                <button class="cta-btn" onclick="switchView('prelims-view')">Go to Prelims Hub</button>
+                <h1>Advanced Civil Services Ecosystem</h1>
+                <p>Welcome to the complete, fully responsive workspace prototype for Quest Link. Open any navigation or sub-menu category above to preview the dynamic multi-page user routing behavior designed by your team.</p>
+                <button class="cta-btn" onclick="switchView('books-view')">Launch Publications Store</button>
             </div>
             <div class="hero-visual">
                 <div style="text-align: center; color: var(--primary);">
-                    <i class="fa-solid fa-network-wired" style="font-size: 54px; margin-bottom: 12px;"></i>
-                    <p style="font-weight: 600;">Quest Link Connected Prototype</p>
+                    <i class="fa-solid fa-square-poll-vertical" style="font-size: 54px; margin-bottom: 12px;"></i>
+                    <p style="font-weight: 600;">Quest Link Functional Blueprint</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <main class="page-view" id="about-view">
-        <div class="content-card">
-            <h2>Philosophy &amp; Corporate Vision</h2>
-            <p>Our mandate focuses on rendering structured data layers that clear away visual distractions, giving aspirants a clean runway to parse information swiftly.</p>
-            <p>This approach transforms static reference sheets directly into modular full-stack portals ready for high-concurrency cloud scaling pipelines.</p>
-        </div>
-    </main>
-
-    <main class="page-view" id="prelims-view">
-        <div class="content-card">
-            <h2>Syllabus &amp; Strategy Guide</h2>
-            <p>This dashboard maps out the tracking criteria for civil services selection. Administrators update these pathways instantly using Postgres data binds.</p>
-            <ul class="syllabus-list">
-                <li><i class="fa-solid fa-building-columns"></i> Indian Polity &amp; Governance Governance Structures</li>
-                <li><i class="fa-solid fa-chart-line"></i> Economic Macro Models &amp; Banking Vectors</li>
-                <li><i class="fa-solid fa-landmark"></i> Ancient, Medieval, &amp; National History Tracks</li>
-                <li><i class="fa-solid fa-mountain-sun"></i> Global and Regional Physical Geography Maps</li>
-            </ul>
-        </div>
-    </main>
-
-    <main class="page-view" id="gs-view">
-        <div class="content-card">
-            <h2>General Studies — Paper 1 Matrix</h2>
-            <p>Detailed distribution tracking data frameworks supporting high-priority subjects including Indian Heritage, Culture, History, and Global Society parameters.</p>
-            <div style="background:var(--slate-100); padding:15px; border-radius:8px; font-family:monospace; margin-top:15px;">
-                STATUS: Connected via standard REST routers to active schema instances.
+    <main class="page-view" id="dynamic-workspace-view">
+        <div class="workspace-card">
+            <div id="content-breadcrumbs" class="workspace-breadcrumbs">Menu / Sub-Menu</div>
+            <h2 id="content-title">Subject Node</h2>
+            <p id="content-description">Workspace core layout mapping parameters dynamically from backend configuration logs.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h4><i class="fa-solid fa-folder-open" style="color:var(--primary); margin-right:8px;"></i> Reference Study Guides</h4>
+                    <p>Curated learning materials and notes managed dynamically by administrators.</p>
+                </div>
+                <div class="feature-item">
+                    <h4><i class="fa-solid fa-circle-play" style="color:var(--primary); margin-right:8px;"></i> Linked Lectures</h4>
+                    <p>Integrated video sessions mapped to this topic tree.</p>
+                </div>
             </div>
         </div>
     </main>
 
     <main class="page-view" id="books-view">
-        <h2>Essential Publications Store</h2>
+        <div class="workspace-breadcrumbs">Store Assets</div>
+        <h2 style="font-size:32px; color:var(--slate-900); margin-bottom:10px;">Essential Publications</h2>
+        <p style="margin-bottom:30px;">Manage pricing, inventory numbers, and cover asset paths for Books 1 to 5 cleanly from the underlying database.</p>
+        
         <section class="books-grid">
-            <div class="book-card">
-                <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
-                <h3>Core Volume 01</h3>
-                <a href="#" class="buy-btn">Order Asset</a>
-            </div>
-            <div class="book-card">
-                <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
-                <h3>Core Volume 02</h3>
-                <a href="#" class="buy-btn">Order Asset</a>
-            </div>
-            <div class="book-card">
-                <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
-                <h3>Core Volume 03</h3>
-                <a href="#" class="buy-btn">Order Asset</a>
-            </div>
-            <div class="book-card">
-                <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
-                <h3>Core Volume 04</h3>
-                <a href="#" class="buy-btn">Order Asset</a>
-            </div>
-            <div class="book-card">
-                <div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div>
-                <h3>Core Volume 05</h3>
-                <a href="#" class="buy-btn">Order Asset</a>
-            </div>
+            <div class="book-card"><div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div><h3>Book Item 1</h3><a href="#" class="buy-btn">Order Asset</a></div>
+            <div class="book-card"><div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div><h3>Book Item 2</h3><a href="#" class="buy-btn">Order Asset</a></div>
+            <div class="book-card"><div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div><h3>Book Item 3</h3><a href="#" class="buy-btn">Order Asset</a></div>
+            <div class="book-card"><div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div><h3>Book Item 4</h3><a href="#" class="buy-btn">Order Asset</a></div>
+            <div class="book-card"><div class="book-cover-placeholder"><i class="fa-solid fa-book"></i></div><h3>Book Item 5</h3><a href="#" class="buy-btn">Order Asset</a></div>
         </section>
     </main>
 
-    <a href="https://wa.me/919472867652?text=Hello%20Swaym%20Team%2C%20the%20Quest%20Link%20interactive%20multipage%20tabs%20are%20working%20perfectly." 
+    <main class="page-view" id="courses-view">
+        <div class="workspace-breadcrumbs">Streaming Portals</div>
+        <h2 style="font-size:32px; color:var(--slate-900); margin-bottom:10px;">Video Mastery Programs</h2>
+        <p style="margin-bottom:30px;">Premium course classrooms secured behind stateless backend user token verification layers.</p>
+        
+        <section class="books-grid">
+            <div class="book-card"><div class="book-cover-placeholder" style="border-color:#10b981;"><i class="fa-solid fa-circle-play"></i></div><h3>Prelims Mastery Programme</h3><a href="#" class="buy-btn" style="background:#10b981; color:white;">Enter Room</a></div>
+            <div class="book-card"><div class="book-cover-placeholder" style="border-color:#10b981;"><i class="fa-solid fa-circle-play"></i></div><h3>Mains Mastery Programme</h3><a href="#" class="buy-btn" style="background:#10b981; color:white;">Enter Room</a></div>
+            <div class="book-card"><div class="book-cover-placeholder" style="border-color:#10b981;"><i class="fa-solid fa-circle-play"></i></div><h3>The Examined Perspective</h3><a href="#" class="buy-btn" style="background:#10b981; color:white;">Enter Room</a></div>
+            <div class="book-card"><div class="book-cover-placeholder" style="border-color:#10b981;"><i class="fa-solid fa-circle-play"></i></div><h3>The Essential Essays</h3><a href="#" class="buy-btn" style="background:#10b981; color:white;">Enter Room</a></div>
+        </section>
+    </main>
+
+    <a href="https://wa.me/919472867652?text=Hello%20Swaym%20Team%2C%20all%20submenus%20and%20navigation%20links%20on%20the%20Quest%20Link%20demo%20are%20responding%20perfectly." 
        class="whatsapp-float" target="_blank" rel="noopener noreferrer">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
     <script>
-        // Core View Switching Engine (Tab Management Routing)
+        // Core View Layout Matrix Switcher
         function switchView(viewId) {
-            // Hide all layout nodes
             const views = document.querySelectorAll('.page-view');
             views.forEach(view => view.classList.remove('active-view'));
             
-            // Render active selection target
             const targetView = document.getElementById(viewId);
             if(targetView) {
                 targetView.classList.add('active-view');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
-            // Collapse mobile menu if open
+            // Close mobile side drawer
             document.getElementById('nav-menu').classList.remove('active');
             const toggleIcon = document.getElementById('mobile-menu-btn').querySelector('i');
             if(toggleIcon.classList.contains('fa-xmark')) {
@@ -270,7 +302,19 @@
             }
         }
 
-        // Mobile Drawer Interactions
+        // Asynchronous Workspace Loader (Handles ALL Sub-Menu Clicks)
+        function loadContent(menu, subMenu) {
+            document.getElementById('content-breadcrumbs').innerText = `${menu} / ${subMenu}`;
+            document.getElementById('content-title').innerText = subMenu;
+            
+            // Custom descriptive placeholders matching your layout structure
+            document.getElementById('content-description').innerText = 
+                `This is the fully deployed live workspace view dedicated to "${subMenu}" under the "${menu}" syllabus tier. In the production app, this layout renders custom resource files and strategies dynamically from your PostgreSQL tables.`;
+            
+            switchView('dynamic-workspace-view');
+        }
+
+        // Mobile Responsive Toggle Drawer Controls
         const menuBtn = document.getElementById('mobile-menu-btn');
         const navMenu = document.getElementById('nav-menu');
         const navItems = document.querySelectorAll('.nav-item');
@@ -291,6 +335,16 @@
                     e.stopPropagation();
                 }
             });
+        });
+
+        document.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                navMenu.classList.remove('active');
+                const icon = menuBtn.querySelector('i');
+                if(icon.classList.contains('fa-xmark')) {
+                    icon.classList.replace('fa-xmark', 'fa-bars');
+                }
+            }
         });
     </script>
 
